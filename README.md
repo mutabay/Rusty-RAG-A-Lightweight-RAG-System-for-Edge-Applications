@@ -1,46 +1,86 @@
-# 🦀 Rusty RAG: A Lightweight Retrieval-Augmented Generation System for Edge Environments
+# 📄 DocuQuery
 
-## 📌 Overview
+> Ask your documents – securely, simply, locally.
 
-**Rusty RAG** is an end-to-end system designed to bring the power of Retrieval-Augmented Generation (RAG) to resource-constrained environments, such as edge computing use cases in manufacturing, IoT, or real-time diagnostics.
-
-Built with **Rust** for performance and safety, this system combines a fast backend, vector search with FAISS, and modern LLM APIs (e.g., OpenAI, Hugging Face) for answering complex queries based on custom document sets.
+DocuQuery is a lightweight, private Retrieval-Augmented Generation (RAG) tool. It lets you ask questions over your own files (PDF, TXT, Markdown, etc.) and returns meaningful answers using local vector search and LLMs. Built with Rust for performance, and designed to run on your own machine or edge device.
 
 ---
 
-## ✨ Key Features
+## 🎯 Purpose
 
-- 🦀 **Rust Backend** using [Axum](https://docs.rs/axum/) for low-latency web services.
-- 🔍 **FAISS** for fast and accurate vector similarity search.
-- 🧠 **LangChain / LLM API Integration** for natural language responses over internal knowledge.
-- 📦 **Dockerized Setup** for deployment on cloud, edge, or local machines.
-- ⚙️ **CI/CD** ready with GitHub Actions.
-- 📊 Optional: Monitoring/logging and Power BI dashboards for operational analytics.
+People often struggle to extract knowledge from long, unstructured documents — research papers, manuals, reports, or internal documentation. DocuQuery solves this by letting users:
+
+- Upload and embed personal documents
+- Ask natural language questions
+- Get answers with sources, securely and locally
+
+---
+
+## 👤 Who Is This For?
+
+- Students or researchers with many papers or notes
+- Developers with API docs, RFCs, or changelogs
+- Freelancers and small teams needing local document Q&A
+- Anyone preferring a privacy-first Chat-with-Docs experience
+
+---
+
+## 🧠 Why Local / Edge?
+
+- No internet? Still usable.
+- Sensitive docs? No leaks.
+- Don’t want OpenAI costs? Use a local model.
+- Run it on laptops, desktops, or Raspberry Pi.
+
+---
+
+## ✅ Functional Requirements
+
+| ID  | Requirement                                                               |
+| --- | ------------------------------------------------------------------------- |
+| FR1 | User can upload documents (TXT, PDF, MD).                                 |
+| FR2 | System extracts and embeds document content.                              |
+| FR3 | User can send a question through a local HTTP API.                        |
+| FR4 | System retrieves relevant content using vector similarity search (FAISS). |
+| FR5 | System generates an answer using an LLM based on retrieved chunks.        |
+| FR6 | System returns the answer plus source passages.                           |
+| FR7 | System supports running via Docker.                                       |
+
+---
+
+## 🚫 Non-Functional Requirements
+
+| ID   | Requirement                                                  |
+| ---- | ------------------------------------------------------------ |
+| NFR1 | Queries should return in under 3 s for 10-20 documents.      |
+| NFR2 | Should run on machines with ≥ 2 GB RAM.                      |
+| NFR3 | No internet dependency if using local LLM and embeddings.    |
+| NFR4 | Modules should be loosely coupled and easy to extend.        |
+| NFR5 | Codebase should be clean, logged, and production-deployable. |
+
 
 ---
 
 ## 🏗️ System Architecture
 
-            ┌────────────────────┐
-            │    End User / UI   │
-            └────────┬───────────┘
-                     │ HTTP Request (query)
-                     ▼
-          ┌──────────────────────────┐
-          │ Rust Backend (Axum API)  │
-          └────────┬─────────────────┘
-                   │
-      ┌────────────▼────────────┐
-      │ RAG Coordinator Module  │  <-- written in Rust
-      └────────┬─────┬──────────┘
-               │     │
-    ┌──────────▼─┐ ┌─▼───────────┐
-    │ Vector DB  │ │  LLM Client │
-    │ (FAISS)    │ │ (API or lib)│
-    └────────────┘ └─────────────┘
-               │     ↑
-               └─────┴──────> Embedded docs from user PDFs, .txt, etc.
-
+                ┌────────────────────┐
+                │     User Input     │
+                └────────┬───────────┘
+                         ▼
+                 [Axum HTTP API]
+                         │
+        ┌────────────────┼────────────────┐
+        ▼                                ▼
+[Document Upload]                [Query Handler]
+        │                                │
+        ▼                                ▼
+ [Text Extractor]             [Retriever (FAISS)]
+        ▼                                │
+ [Embedder + FAISS]                      ▼
+        └────────────► [LLM Generator] ◄─┘
+                                │
+                                ▼
+                     [Answer + Sources Output]
 
 
 ---
@@ -96,11 +136,47 @@ rusty-rag/
 | Vector Search | FAISS                        |
 | Deployment    | Docker, CI/CD, Observability |
 
-## 👨‍💻 Contributing
-```bash
-# Step-by-step
-git checkout -b feature/your-feature
-git commit -m "Add feature"
-git push origin feature/your-feature
-# Then open a Pull Request
-```
+# Roadmap
+🗺️ Roadmap – Low Complexity, High Learning
+📌 Phase 1: Foundation (Week 1-2)
+ Learn Rust basics: ownership, modules, async.
+
+ Set up basic Axum API server.
+
+ Add health check and basic logging.
+
+📌 Phase 2: Document Upload & Embedding (Week 2-3)
+ Create endpoint for document upload.
+
+ Convert PDF/TXT/MD into plain text.
+
+ Call OpenAI embedding API.
+
+ Store vectors in FAISS.
+
+📌 Phase 3: Query Flow (Week 4)
+ Implement query endpoint.
+
+ Retrieve top-k chunks via FAISS.
+
+ Call OpenAI GPT for answer generation.
+
+📌 Phase 4: Polish & Deploy (Week 5)
+ Format response with source references.
+
+ Add simple logs and error handling.
+
+ Build Dockerfile and docker-compose.
+
+ Test on laptop or edge device (≥ 2 GB RAM).
+
+🧠 Optional Add-ons
+ Add basic frontend UI.
+
+ Switch to local embedding models.
+
+ Add offline LLM (e.g., Mistral / Ollama).
+
+ Upload folders of documents.
+
+ Save answer history or favorites.
