@@ -85,6 +85,13 @@ People often struggle to extract knowledge from long, unstructured documents —
 
 ---
 
+| Component                   | Role                                     |
+| --------------------------- | ---------------------------------------- |
+| Rust API                    | Uploads documents & generates embeddings |
+| Ollama (`nomic-embed-text`) | Converts text → vector                   |
+| Python FAISS server         | Stores & searches those vectors          |
+
+
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
