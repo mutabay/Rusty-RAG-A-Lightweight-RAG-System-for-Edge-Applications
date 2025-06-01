@@ -1,5 +1,7 @@
 mod routes;
 mod utils;
+mod services;
+use dotenvy::dotenv;
 
 use axum::{
     routing::{get, post},
@@ -10,6 +12,7 @@ use routes::upload::upload;
 
 #[tokio::main]
 async fn main() {
+    dotenv().ok(); // Load .env variables
     let app = Router::new()
         .route("/", get(root))
         .route("/upload", post(upload));

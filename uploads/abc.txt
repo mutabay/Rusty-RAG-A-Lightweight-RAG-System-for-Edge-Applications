@@ -1,0 +1,32 @@
+📅 Date: 2025-05-31
+📝 Notes Dump
+
+1. “You don't learn to walk by following rules. You learn by doing, and by falling over.” – Richard Branson
+
+2. Random Todo List:
+   - [ ] Learn more Rust (traits, lifetimes, async)
+   - [x] Set up Axum project
+   - [ ] Try cargo-watch for live reloading
+   - [ ] Buy coffee
+
+3. Programming Languages I want to learn in 2025:
+   - Rust
+   - Go
+   - TypeScript (deep dive)
+   - Python (for ML)
+
+4. Fun Fact:
+   Bananas are berries, but strawberries are not.
+
+5. If life gives you Rust errors...
+   ...borrow them immutably and move on 🚀
+
+6. My dev setup checklist:
+   - Terminal: zsh + starship
+   - Editor: VS Code + Rust Analyzer
+   - Version Control: Git + GitHub
+   - Cargo watch for local dev
+
+7. Quote of the day:
+   “The compiler is your friend — a grumpy, strict, yet loyal friend.”
+
