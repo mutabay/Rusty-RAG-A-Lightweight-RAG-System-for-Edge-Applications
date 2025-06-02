@@ -10,7 +10,7 @@ use tokio::net::TcpListener;
 
 use routes::upload::upload;
 use routes::query::query;
-
+use routes::ask::ask;
 
 #[tokio::main]
 async fn main() {
@@ -19,7 +19,8 @@ async fn main() {
     let app = Router::new()
         .route("/", get(root))  // 👈 THIS must exist
         .route("/upload", post(upload))
-        .route("/query", post(query));
+        .route("/query", post(query))
+        .route("/ask", post(ask));
 
     let listener = TcpListener::bind("0.0.0.0:8000").await.unwrap();
     
