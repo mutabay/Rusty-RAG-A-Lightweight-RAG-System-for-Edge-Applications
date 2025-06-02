@@ -1,0 +1,30 @@
+---
+config:
+  theme: neo
+  layout: fixed
+---
+flowchart TD
+ subgraph subGraph0["Rust Axum"]
+        B["Axum /upload Route"]
+        F["Axum /ask Route"]
+        C["Read & Chunk File"]
+        G["Embed Question via Ollama"]
+        J["Return Answer with Sources"]
+  end
+ subgraph Ollama["Ollama"]
+        D["Embed Chunks via Ollama"]
+        I["Send Context + Question to LLM - Ollama"]
+  end
+ subgraph subGraph2["Python FastAPI"]
+        E["Send to FAISS Server - Python"]
+        H["Query Top-K Chunks via FAISS"]
+  end
+    A["User"] -- Upload File --> B
+    B --> C
+    C --> D
+    D --> E
+    A -- Ask Question --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
