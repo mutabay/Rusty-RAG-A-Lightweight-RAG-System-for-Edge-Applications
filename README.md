@@ -63,7 +63,7 @@ Long documents often hide critical information. Manuals, research papers, or cha
 
 ## 🏗️ Architecture Overview
 
-![Uploading flowchart.png…]()
+![DocuQuery Architecture](diagrams/flowchart.png)
 
 ---
 
