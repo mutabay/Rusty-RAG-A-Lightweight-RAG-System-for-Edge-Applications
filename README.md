@@ -81,6 +81,8 @@ Long documents often hide critical information. Manuals, research papers, or cha
 ---
 
 ## 📂 File Structure
+
+```text
 docuquery/
 ├── src/
 │   ├── main.rs
@@ -100,7 +102,7 @@ docuquery/
 │   └── index_store/
 ├── .env
 ├── Dockerfile (optional later)
-
+```
 
 ---
 
