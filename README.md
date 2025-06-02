@@ -63,51 +63,7 @@ Long documents often hide critical information. Manuals, research papers, or cha
 
 ## 🏗️ Architecture Overview
 
-
-<pre> ```mermaid <!-- 
-  
-  graph TD
-    A[User] -->|Upload File| B[Axum /upload Route]
-    B --> C[Read & Chunk File]
-    C --> D[Embed Chunks via Ollama]
-    D --> E[Send to FAISS Server (Python)]
-
-    A -->|Ask Question| F[Axum /ask Route]
-    F --> G[Embed Question via Ollama]
-    G --> H[Query Top-K Chunks via FAISS]
-    H --> I[Send Context + Question to LLM (Ollama)]
-    I --> J[Return Answer with Sources]
-
-    subgraph Rust (Axum)
-        B
-        F
-        C
-        G
-        J
-    end
-
-    subgraph Ollama
-        D
-        G
-        I
-    end
-
-    subgraph Python (FastAPI)
-        E
-        H
-    end
-
-  
-  
-  --> ``` </pre>
-
-[User] ─▶ /upload (Rust/Axum) ──▶ [read file, chunk, embed via Ollama]
-                        └───▶ [send each chunk to FAISS FastAPI server]
-
-[User] ─▶ /ask (Rust/Axum) ──▶ [embed question via Ollama]
-                        └───▶ [search top-k chunks from FAISS]
-                        └───▶ [send context + question to LLM via Ollama]
-                        └───▶ Return generated answer                        
+![Uploading flowchart.png…]()
 
 ---
 
