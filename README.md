@@ -53,10 +53,9 @@ Long documents often hide critical information. Manuals, research papers, or cha
 | ID   | Requirement                                                  |
 | ---- | ------------------------------------------------------------ |
 | NFR1 | Queries should return in under 3 s for 10-20 documents.      |
-| NFR2 | Should run on machines with ≥ 2 GB RAM.                      |
-| NFR3 | No internet dependency if using local LLM and embeddings.    |
-| NFR4 | Modules should be loosely coupled and easy to extend.        |
-| NFR5 | Codebase should be clean, logged, and production-deployable. |
+| NFR2 | No internet dependency if using local LLM and embeddings.    |
+| NFR3 | Modules should be loosely coupled and easy to extend.        |
+| NFR4 | Codebase should be clean, logged, and production-deployable. |
 
 
 ---
