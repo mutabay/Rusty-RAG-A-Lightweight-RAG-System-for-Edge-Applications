@@ -114,7 +114,6 @@ docuquery/
 | 💬 Streaming output        | Stream LLM answers in real-time via Axum                         |
 | 💾 Save answers + history  | Store past questions and answers in a local DB                   |
 
-
 ---
 
 ## 🧠 Learning Goals
